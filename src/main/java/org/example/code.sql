@@ -16,6 +16,18 @@ from Person
 group by email
 having COUNT(*) > 1
 
+--183. Customers Who Never Order
+select name as Customers
+from Customers
+where id
+not in (select customerId from Orders)
+
+-- 196. Delete Duplicate Emails
+delete p
+from Person p, Person q
+where p.id > q.id
+and p.email = q.email
+
 -- 197. Rising Temperature
 select b.id
 from Weather a, Weather b
