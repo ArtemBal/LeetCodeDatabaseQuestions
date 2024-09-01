@@ -8,6 +8,17 @@ select max(salary) as SecondHighestSalary
 from Employee
 where Salary not in (select max(salary) from Employee)
 
+--177. Nth Highest Salary
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+    set N = N - 1;
+    RETURN (
+        select distinct salary
+        from Employee
+        order by salary desc limit N,1
+    );
+END;
+
 -- 181. Employees Earning More Than Their Managers
 select e1.name as Employee
 from Employee as e1
