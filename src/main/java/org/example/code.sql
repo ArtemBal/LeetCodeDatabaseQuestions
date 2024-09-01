@@ -3,6 +3,11 @@ select p.firstName, p.lastName, a.city, a.state
 from Person as p left join Address as a
 on p.personId = a.personId;
 
+--176. Second Highest Salary
+select max(salary) as SecondHighestSalary
+from Employee
+where Salary not in (select max(salary) from Employee)
+
 -- 181. Employees Earning More Than Their Managers
 select e1.name as Employee
 from Employee as e1
