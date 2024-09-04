@@ -19,6 +19,10 @@ BEGIN
     );
 END;
 
+--178. Rank Scores
+select score, dense_rank() over (order by score desc) as 'rank'
+from Scores
+
 -- 181. Employees Earning More Than Their Managers
 select e1.name as Employee
 from Employee as e1
