@@ -23,6 +23,19 @@ END;
 select score, dense_rank() over (order by score desc) as 'rank'
 from Scores
 
+--180. Consecutive Numbers
+select distinct num as ConsecutiveNums
+from (
+    select id, num
+    , lead(num, 1) over (order by id) as c1
+    , lead(num, 2) over (order by id) as c2
+    , lead(id, 1) over (order by id) as id1
+    , lead(id, 2) over (order by id) as id2
+    from Logs
+) ConsLogs
+where num = c1 and c1 = c2
+and id + 1 = id1 and id + 2 = id2
+
 -- 181. Employees Earning More Than Their Managers
 select e1.name as Employee
 from Employee as e1
