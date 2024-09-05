@@ -55,6 +55,14 @@ from Customers
 where id
 not in (select customerId from Orders)
 
+--184. Department Highest Salary
+select d.name as Department, e.name as Employee, e.salary as Salary
+from Employee as e right join Department as d
+on e.departmentId = d.id
+where (d.id, e.salary) in (select departmentId, max(salary)
+from Employee
+group by departmentid)
+
 -- 196. Delete Duplicate Emails
 delete p
 from Person p, Person q
