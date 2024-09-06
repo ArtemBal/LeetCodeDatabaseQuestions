@@ -63,6 +63,14 @@ where (d.id, e.salary) in (select departmentId, max(salary)
 from Employee
 group by departmentid)
 
+--185. Department Top Three Salaries
+select Department.Name as "Department", e.name as "Employee", e.salary
+from (select name, departmentId, salary
+    , dense_rank() over (partition by departmentId order by salary desc) as r
+    from Employee) e
+join Department on e.departmentId = Department.id
+where r <= 3
+
 -- 196. Delete Duplicate Emails
 delete p
 from Person p, Person q
