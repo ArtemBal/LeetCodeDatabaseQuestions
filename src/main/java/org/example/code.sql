@@ -36,14 +36,14 @@ from (
 where num = c1 and c1 = c2
 and id + 1 = id1 and id + 2 = id2
 
--- 181. Employees Earning More Than Their Managers
+--181. Employees Earning More Than Their Managers
 select e1.name as Employee
 from Employee as e1
 inner join Employee as e2
 on e1.managerId = e2.id
 and e1.salary > e2.salary
 
--- 182. Duplicate Emails
+--182. Duplicate Emails
 select email as Email
 from Person
 group by email
@@ -71,17 +71,25 @@ from (select name, departmentId, salary
 join Department on e.departmentId = Department.id
 where r <= 3
 
--- 196. Delete Duplicate Emails
+--196. Delete Duplicate Emails
 delete p
 from Person p, Person q
 where p.id > q.id
 and p.email = q.email
 
--- 197. Rising Temperature
+--197. Rising Temperature
 select b.id
 from Weather a, Weather b
 where datediff(b.recordDate, a.recordDate) = 1
 and b.temperature > a.temperature
 
+--262. Trips and Users
+select request_at as Day, round(avg(status != 'completed'), 2) as 'Cancellation Rate'
+from Trips as t
+join Users as u1 on (t.client_id = u1.users_id and u1.banned = 'No')
+join Users as u2 on (t.driver_id = u2.users_id and u2.banned = 'No')
+where request_at between '2013-10-01' and '2013-10-03'
+group by day
+order by day
 
 
