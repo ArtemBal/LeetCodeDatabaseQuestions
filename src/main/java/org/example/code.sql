@@ -92,4 +92,12 @@ where request_at between '2013-10-01' and '2013-10-03'
 group by day
 order by day
 
+--570. Managers with at Least 5 Direct Reports
+select Manager.name
+from Employee
+inner join Employee as Manager
+on (Manager.id = Employee.managerId)
+group by Manager.id
+having count(*) >= 5
+
 
