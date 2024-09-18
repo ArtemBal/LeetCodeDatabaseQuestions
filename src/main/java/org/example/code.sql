@@ -100,4 +100,8 @@ on (Manager.id = Employee.managerId)
 group by Manager.id
 having count(*) >= 5
 
-
+--577. Employee Bonus
+select e.name, b.bonus
+from Employee as e left join Bonus as b
+on e.empId = b.empId
+where ifnull(b.bonus, 0) < 1000
